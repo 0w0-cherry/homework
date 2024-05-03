@@ -1,0 +1,114 @@
+#include<iostream>
+using namespace std;
+
+//乘法计算
+//限制：可用于正负数，不能使用 * 运算符
+
+//1.转换字符数组计算数组大小
+int mul1(int a, int b)
+{
+	//char A[a][b];
+	//if( (a>0 && b>0) || (a<0 && b<0) )
+	//return sizeof(A);
+	//else
+	//return sizeof(A)/(-1);//正数转负数
+
+	//一行写法，变量名匿名
+	//return (int)sizeof(char[a][b]);
+	return 0;
+}
+
+//2.全局变量+递归
+int sum2 = 0;//sum为全局变量，记得使用前清空
+int mul2(int a, int b)
+{
+	if (b == 0)
+		return sum2;
+	if (b-- > 0)
+		sum2 += a;
+	else if (b++ < 0)
+		sum2 -= a;
+	return mul2(a, b);
+}
+
+//3.优化递归
+int mul3(int a, int b)
+{
+	if (b == 0 || a == 0)
+		return 0;
+	if (b < 0)//b转正数
+	{
+		a = -a;
+		b = -b;
+	}
+
+	if (b == 1)
+		return a;
+	else if (b-- > 0)
+		return mul3(a, b)+a;
+}
+
+
+//4.位运算+递归(判断奇偶，利用 位运算2 的性质--乘除2+多余)
+int mul4(int a, int b)
+{
+	if (a == 0 || b == 0)
+		return 0;
+	if (b < 0)//b转正数
+	{
+		a = -a;
+		b = -b;
+	}
+
+	if (b == 1)
+		return a;
+	return (b & 1) == 1 ? (mul4(a, b >> 1) << 1) + a :
+		mul4(a, b >> 1) << 1;
+}
+//5.4的优化，一行
+int mul5(int a, int b)
+{
+	if (b < 0)
+	{
+		a = -a;
+		b = -b;
+	}
+	return b ? mul5((long long)a << 1, b >> 1) + (b & 1 ? a : 0) : 0;
+}
+
+
+
+//6.循环加法模拟乘算
+int mul6(int a, int b)
+{
+	int sum6 = 0;
+	while (b--)
+	{
+		sum6 += a;
+	}
+	return sum6;
+}
+
+//7.位运算+循环加法模拟乘算( 复杂度O(min(a,b))  )
+int mul7(int a, int b)
+{
+	int sum7 = 0;
+	long long x = max(a, b);
+	long long y = min(a, b);
+	while (y)
+	{
+		if (y & 1)sum7 += x;
+		x += x;
+		y >>= 1;
+	}
+	return sum7;
+}
+
+int main0(void)
+{
+	ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+
+	sum2 = 0;//sum为全局变量，记得使用前清空
+	cout << mul5(10, 20) << endl;;
+	return 0;
+}
