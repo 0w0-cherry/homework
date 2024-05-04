@@ -1,0 +1,199 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+//阶乘位数
+//设计一个算法，算出 n 阶乘有多少个尾随零。
+// 
+//n!中每一个因子10都意味着n!能被5和2整除。
+//明显5比2多，累计计算每个数含5的个数
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        int count = 0;
+        while (n)
+        {
+            count += n / 5;
+            n /= 5;
+        }
+        return count;
+    }
+};
+
+
+int main()
+{
+    double a=3.6415;
+    int x = a;//整数
+    double y = a - x;//小数
+    if (y >= 0.5)
+        cout << (x+1) << endl;
+    else
+        cout << x << endl;
+
+    return 0;
+}
+
+//string库函数练习
+//0.迭代器
+//正向迭代器
+void test0()
+{
+	string s1 ("hello ");
+	string::iterator rit = s1.begin();//读写
+	while (rit != s1.end())
+	{
+		cout << *rit << " ";
+		rit++;
+	}
+	cout << endl;
+
+	const string s2("hello ");
+	string::const_iterator it3 = s2.begin();//只读
+}
+//反向迭代器
+void test1() 
+{
+	string s1("hello ");
+	string::reverse_iterator rit = s1.rbegin();
+	string::const_reverse_iterator it3 = s1.rbegin();
+	while (rit != s1.rend())
+	{
+		cout << *rit << " ";
+		rit++;
+	}
+	cout << endl;
+}
+
+//1.capacity
+//扩/缩 容
+void test2()
+{
+	string s1("aaaaaaaaaaaaaaa");//15
+	s1.push_back('c');
+	cout << s1 << endl;
+	cout << s1.capacity() << endl;
+	cout << s1.size() << endl;
+
+
+	s1.clear();
+	s1.shrink_to_fit();//缩容
+	cout << s1.capacity() << endl;
+	cout << s1.size() << endl;
+	
+
+	//resize
+	s1.resize(10);
+	cout << s1.size() << endl;
+	cout << s1.capacity() << endl;
+
+	s1.resize(30);
+	cout << s1.size() << endl;
+	cout << s1.capacity() << endl;
+}
+
+//2.元素访问
+void test3()
+{
+	string s1("hello");
+	cout << s1[3] << endl;//[]
+	cout << s1.at(3) << endl;//at
+	try//抛异常
+	{
+		s1.at(15);
+	}
+	catch (const exception& e)
+	{
+		cout << e.what() << endl;
+	}
+}
+
+
+//modifiers： string增、删、改
+//insert、earse、replace需要挪动数据，少用
+void test4()
+{
+	//1.push
+	string s1("hello");
+	s1.push_back('!');
+	cout << s1 << endl << endl;;
+
+	//2.append
+	s1.append("hello bit");
+	cout << s1 << endl;
+
+	s1.append(10, 'x');
+	cout << s1 << endl;
+
+	string s2("apple");
+	s1.append(s2);
+	cout << s1 << endl;
+
+	s1.append(++s2.begin(), --s2.end());
+	//s1.append( ++s2.rend(),  --s2.rbegin());//不可行，可能需要抛异常？
+	cout << s1 << endl << endl;;
+
+
+	//3.+=
+	string s3("hello he");
+	s3 += ' ';
+	s3 += "apple";
+	cout << s3 << endl << endl;;
+
+
+	//4.assign,替换为当前字符串
+	string s4("aaaa");
+	cout << s4 << endl;
+
+	s4.assign("xxxxxx");
+	cout << s4 << endl;
+
+	//5.insert当前位置之前插入
+	s4.insert(0, " yyyy ");
+	cout << s4 << endl;
+
+	//6.erase删除
+	s4.erase(5, 3);
+	cout << s4 << endl << endl;
+
+	s4.erase();//需注意此处的删除，全删变为NULL（空）
+	cout << s4 << endl << endl;
+
+
+	//7.replace替换、find查找
+	string s5("aaxaxaaa");
+	s5.replace(5, 1, "%1");
+	cout << s5 << endl;
+
+
+	string s6("ax  ax aa aaa");
+	size_t n = s6.find(' ');
+	while (n != string::npos)
+	{
+		s6.replace(n, 1, "%10");
+		n = s6.find(' ');
+	}
+	cout << s6 << endl << endl;
+}
+
+//替换数据，原数据不影响
+void TiHuan(string s)
+{
+	string s1;
+	s1.reserve(s.size());
+	for (auto a : s)
+	{
+		if (a != ' ')
+		{
+			s1 += a;
+		}
+		else
+		{
+			s1 += "%10";
+		}
+	}
+	cout << s1 << endl;
+	//s.swap(s1);//改变原数据
+	//cout<<s<<endl;
+}
+
