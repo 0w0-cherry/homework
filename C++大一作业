@@ -1,1 +1,56 @@
+//string的构造函数
+void test1()
+{
+	string S;
+	string S1("hello");
+	string s(S1);
+	string a(s, 2, 10);
 
+	cout << S << endl;
+	cout << S1 << endl;
+	cout << s << endl;
+	cout << a << endl;
+}
+//元素访问
+void test2()
+{
+	//1.下标访问
+	string s(10,'a');
+	for (int i = 0; i < s.size(); i++)
+	{
+		s[i]++;
+	}
+	//cout << s << endl;
+	//cout << s.size() << endl;
+	//cout << s.capacity() << endl;
+
+	//2.迭代器，行为像指针
+	string s1("hello");
+	string::iterator it3 = s1.begin();
+	//vector<int>::iterator it4 = v.begin();
+	//list<int>::iterator it4 = v.begin();
+	while (it3 != s1.end())//end()指向的是最后一个元素的下一个位置，所以访问最后一个元素的正确操作为： end() - 1
+	{
+		cout << *it3 << " ";
+		it3++;
+	}
+	cout << endl;
+
+	//3.范围for
+	string s2("hello");
+	for (auto e : s2)
+	{
+		cout << e << " ";
+	}
+	cout << endl;
+
+
+	//显示类型名
+	cout << typeid(it3).name() << endl;
+}
+
+int main()
+{
+	test2();
+	return 0;
+}
