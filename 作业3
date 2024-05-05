@@ -1,0 +1,117 @@
+https://leetcode.cn/problems/add-strings/description/
+字符串相加
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        string str;
+        int end1=num1.size()-1;
+        int end2=num2.size()-1;
+        int next=0;
+        int val=0;
+        str.reserve(num1.size()>num2.size()?num1.size()+1 : num2.size()+1);
+        while(end1>=0 || end2>=0)
+        {
+            int a1=end1>=0? num1[end1--]-'0':0;
+            int a2=end2>=0? num2[end2--]-'0':0;
+
+            val=a1+a2+next;
+            next=val/10;
+            val=val%10;
+            str+=(val+'0');
+        }
+        if(next==1)
+        {
+            str+=(1+'0');
+        }
+        reverse(str.begin(),str.end());
+        return str;
+    }
+};
+
+https://leetcode.cn/problems/reverse-only-letters/
+class Solution {
+public:
+    bool IsZimu(char n)
+    {
+        if(n>='a'&& n<='z')
+        return true;
+        else if(n>='A'&&n<='Z')
+        return true;
+
+        return false;
+    }
+
+
+    string reverseOnlyLetters(string s) {
+        int left=0;
+        int right=s.size()-1;
+        while(left<right)
+        {
+            while( left<right && !IsZimu(s[left])   )
+            left++;
+            while( left<right && !IsZimu(s[right])  )
+            right--;
+
+            swap(s[left],s[right]);
+            left++;
+            right--;
+        }
+
+
+        return s;
+    }
+};
+
+
+
+https://leetcode.cn/problems/first-unique-character-in-a-string/
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        int a[128] = {0};
+        int size = s.size();
+        for(int i=0;i<size;i++)
+        {
+              a[s[i]]++;
+        }
+
+        int i=0;
+        for(i=0;i<size;i++)
+        {
+            if(a[  s[i]  ]==1)//挨个查找每个字符出现的次数
+            {
+                return i;
+            }
+        }
+        return -1;
+
+    }
+};
+
+
+https://leetcode.cn/problems/valid-palindrome/description/
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        string s1;
+        for(auto e: s)
+        {
+            if(e>='a' && e<='z')
+            s1+=e;
+            else if(e>='A' && e<='Z')
+            s1+=(e+32);
+            else if(e>='0'&&e<='9')
+            s1+=e;
+        }
+        string s2=s1;
+        reverse(s1.begin(),s1.end());
+        if(s1==s2)
+        return true;
+        return false;
+    }
+};
+
+
+
+
+
