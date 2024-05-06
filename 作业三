@@ -64,3 +64,19 @@ int main() {
 
 }
 // 64 位输出请用 printf("%lld")
+
+
+//整型、浮点 与 string的互相转化
+#include<string>
+int main()
+{
+	int i = 1234;
+	double d = 11.55;
+	string s1 = to_string(i);
+	string s2 = to_string(d);
+
+	string s3("44.55");
+	double d1 = stod(s3);//有些浮点数在存储时在底层无法精确存储
+	cout << d1 << endl;
+	return 0;
+}
