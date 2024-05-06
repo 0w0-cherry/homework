@@ -1,0 +1,60 @@
+//分割网址
+//网址=协议+域名+URL
+
+//1.获得协议
+void test_string1()
+{
+	string s1("https://legacy.cplusplus.com/reference/string/string/reserve/");
+	size_t pos = s1.find(':');
+	if (pos != string::npos)
+	{
+		string protocol = s1.substr(0, pos);//更新内容
+		cout << protocol << endl;
+	}
+}
+//2.获得域名
+void test_string2()
+{
+	string s1("https://legacy.cplusplus.com/reference/string/string/reserve/");
+	size_t pos = s1.find(':');
+	size_t pos2 = s1.find('/', pos + 3);
+	if (pos2!= string::npos)
+	{
+		 string domain = s1.substr(pos + 3, pos2-(pos+3));
+		cout << domain << endl;
+	}
+}
+//3.获得URL
+void test_string3()
+{
+	string s1("https://legacy.cplusplus.com/reference/string/string/reserve/");
+	size_t pos = s1.find(':');
+	size_t pos2 = s1.find('/', pos + 3);
+	if (pos2 != string::npos)
+	{
+		string url = s1.substr(pos2+1);
+		cout << url << endl;
+	}
+}
+
+//获得文件后缀
+void test_string()
+{
+	string s1("file.cpp");
+	size_t pos = s1.rfind('.');
+	if (pos != string::npos)
+	{
+		string suffix = s1;
+		suffix = s1.substr(pos, s1.size() - pos);//更新内容
+		cout << suffix << endl;
+	}
+	else
+	{
+		cout << "没有后缀" << endl;
+	}
+}
+int main()
+{
+	test_string();
+	return 0;
+}
