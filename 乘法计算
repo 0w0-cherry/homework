@@ -24,9 +24,9 @@ int mul2(int a, int b)
 {
 	if (b == 0)
 		return sum2;
-	if (b-- > 0)
+	if (b-- > 0)//先执行b>0
 		sum2 += a;
-	else if (b++ < 0)
+	else if (b++ < 0)//先执行b<0
 		sum2 -= a;
 	return mul2(a, b);
 }
