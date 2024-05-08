@@ -1,0 +1,40 @@
+https://leetcode.cn/problems/search-in-rotated-sorted-array/solutions/
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]==target)
+            return i;
+        }
+        return -1;
+    }
+};
+
+
+https://leetcode.cn/problems/convert-binary-number-in-a-linked-list-to-integer/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        int sum=0;
+        ListNode* cur=head;
+
+        while(cur)
+        {
+            sum=sum*2+ cur->val;
+            cur=cur->next;
+        }
+        return sum;
+    }
+};
