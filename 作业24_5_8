@@ -60,3 +60,33 @@ public:
         return sum;
     }
 };
+
+
+https://leetcode.cn/problems/reverse-words-in-a-string-iii/
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans=s;
+        int len=s.length();
+        int i=0;
+        while(i<len)
+        {
+            int start=i;
+            while( i<len && s[i]!=' ')
+            {
+                i++;
+            }
+            //s[i]==' ' 
+            for(int j=start;j<i;j++)
+            {
+                ans[i-1-(j-start)]=s[j];
+            }
+            //跳过空格
+            while(i<len && s[i]==' ')
+            {
+                i++;
+            }
+        }
+        return ans;
+    }
+};
