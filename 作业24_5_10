@@ -1,0 +1,94 @@
+https://leetcode.cn/problems/sum-lists-lcci/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* phead=(ListNode*)malloc(sizeof(ListNode));
+        ListNode* cur=phead;
+        int next=0,sum=0;
+        while(l1 || l2 || next)
+        {
+            sum=0;
+            int x= l1==NULL?0:l1->val;
+            int y=l2==NULL?0:l2->val;
+            if(l1)
+            l1=l1->next;
+            if(l2)
+            l2=l2->next;
+            
+            sum+= x+y+next;
+            next=sum/10;
+            ListNode* node=new ListNode(sum%10);
+            cur->next=node;
+            cur=cur->next;
+        }
+
+        return phead->next;
+    }
+};
+
+
+https://leetcode.cn/problems/sum-lists-lcci/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* phead=(ListNode*)malloc(sizeof(ListNode));
+        ListNode* cur=phead;
+        int next=0,sum=0;
+        while(l1 || l2 || next)
+        {
+            sum=0;
+            int x= l1==NULL?0:l1->val;
+            int y=l2==NULL?0:l2->val;
+            if(l1)
+            l1=l1->next;
+            if(l2)
+            l2=l2->next;
+            
+            sum+= x+y+next;
+            next=sum/10;
+            ListNode* node=new ListNode(sum%10);
+            cur->next=node;
+            cur=cur->next;
+        }
+
+        return phead->next;
+    }
+};
+
+https://leetcode.cn/problems/maximum-nesting-depth-of-the-parentheses/
+class Solution {
+public:
+    int maxDepth(string s) {
+        int ans=0;
+        int size=0;
+        for(auto e:s)
+        {
+            if(e=='(')
+            {
+                size++;
+                ans=max(ans,size);
+            }
+            else if(e==')')
+            {
+                size--;
+            }
+        }
+        return ans;
+    }
+};
