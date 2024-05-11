@@ -1,0 +1,54 @@
+https://leetcode.cn/problems/sZ59z6/
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+int hash[1001]={0};
+void preorder(struct TreeNode* root)
+{
+    if(root)
+    {
+    hash[root->val]++;
+    preorder(root->left);
+    preorder(root->right);
+    }
+}
+
+int numColor(struct TreeNode* root){
+    memset(hash, 0, sizeof(hash));//清空，用于多组数据输入
+    preorder(root);
+    int sum=0;
+    for(int i=1;i<1001;i++)
+    {
+        if(hash[i])
+        {
+            sum++;
+        }
+    }
+    return sum;
+}
+
+
+https://leetcode.cn/problems/make-the-string-great/
+class Solution {
+public:
+    string makeGood(string s) {
+        int len=s.size();
+        char* a=(char*)malloc(len+1);//模拟栈
+        int top=0;
+        for(int i=0;i<len;i++)
+        {
+            a[top++]=s[i];
+            if( (top>=2) && ((a[top-1])==a[top-2]+32 || a[top-1]==a[top-2]-32) )
+            {
+                top-=2;
+            }
+        }
+        a[top]='\0';
+        return a;
+    }
+};
