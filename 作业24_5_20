@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int dfs(TreeNode* root,int& ans)
+    {
+        if(root==NULL)
+        {
+            return 0;
+        }
+        int ansL=0,ansR=0;
+        int ansleft=dfs(root->left,ansL);
+        int ansright=dfs(root->right,ansR);
+
+        ans=root->val+ansL+ansR;//此处的改变是为了 递归时让ansL和ansR改变
+        return ansleft+ansright+abs(ansL-ansR);
+    }
+
+
+    int findTilt(TreeNode* root) {
+        int ans=0;
+        return dfs(root,ans);
+    }
+};
